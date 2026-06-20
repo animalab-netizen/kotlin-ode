@@ -26,7 +26,7 @@ The API is usable, but still under refinement. Expect incremental improvements i
 
 Current coordinates:
 
-- `groupId`: `br.com.lab`
+- `groupId`: `io.github.animalab-netizen`
 - `artifactId`: `kotlin-ode`
 - `version`: `0.1.0`
 
@@ -34,7 +34,7 @@ Dependency:
 
 ```gradle
 dependencies {
-    implementation "br.com.lab:kotlin-ode:0.1.0"
+    implementation "io.github.animalab-netizen:kotlin-ode:0.1.0"
 }
 ```
 
@@ -48,11 +48,11 @@ repositories {
 }
 ```
 
-For remote consumption, configure the Maven repository used by your distribution flow:
+For public distribution, prefer Maven Central:
 
 ```gradle
 repositories {
-    maven { url "https://maven.pkg.jetbrains.space/v2/p/v-2-software-house/maven" }
+    mavenCentral()
 }
 ```
 
@@ -63,11 +63,11 @@ Example `build.gradle`:
 ```gradle
 repositories {
     mavenLocal()
-    maven { url "https://maven.pkg.jetbrains.space/v2/p/v-2-software-house/maven" }
+    mavenCentral()
 }
 
 dependencies {
-    implementation "br.com.lab:kotlin-ode:0.1.0"
+    implementation "io.github.animalab-netizen:kotlin-ode:0.1.0"
 }
 ```
 
@@ -217,6 +217,8 @@ Publish to the configured Maven repository:
 ```bash
 ./gradlew publishReleasePublicationToMavenRepository
 ```
+
+When publishing outside Maven Central automation, provide `publicationRepositoryUrl`, `publicationRepositoryUsername` and `publicationRepositoryPassword` through an untracked `publication.properties` file or CI secrets.
 
 ## Compatibility Notes
 

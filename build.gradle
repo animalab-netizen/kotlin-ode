@@ -26,7 +26,7 @@ def minSdkKotlinOde = 24
 def targetSdkKotlinOde = 30
 def versionCodeKotlinOde = 1
 def versionNameKotlinOde = "0.1.0"
-def groupIdKotlinOde = "br.com.lab"
+def groupIdKotlinOde = "io.github.animalab-netizen"
 def artifactIdKotlinOde = "kotlin-ode"
 def compileSdkKotlinOde = 30
 def buildToolsVersionKotlinOde = "30.0.0"
@@ -179,12 +179,13 @@ publishing {
 
     repositories {
         mavenLocal()
-        if (project.hasProperty('urlV2Space')) {
+        def publicationRepositoryUrl = findProperty('publicationRepositoryUrl')
+        if (publicationRepositoryUrl) {
             maven {
-                url urlV2Space
+                url = uri(publicationRepositoryUrl)
                 credentials {
-                    username findProperty('spaceUsername')
-                    password findProperty('spacePassword')
+                    username findProperty('publicationRepositoryUsername') ?: System.getenv('MAVEN_USERNAME')
+                    password findProperty('publicationRepositoryPassword') ?: System.getenv('MAVEN_PASSWORD')
                 }
             }
         }

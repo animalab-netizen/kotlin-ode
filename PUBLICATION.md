@@ -7,14 +7,14 @@ This document describes the current and next-step publication strategy for `kotl
 The library is already configured for:
 
 - local publication with `publishReleasePublicationToMavenLocal`
-- remote publication to the Maven repository configured in `gradle.properties`
+- remote publication to a repository explicitly configured by ÂnimaLab
 - generation of AAR, sources JAR, POM and Gradle module metadata
 - publication metadata including maintainer and Apache-2.0 license
 - `organization` and `scm` POM metadata through Gradle properties
 
 ## Current Coordinates
 
-- groupId: `br.com.lab`
+- groupId: `io.github.animalab-netizen`
 - artifactId: `kotlin-ode`
 - version: `0.1.0`
 
@@ -37,17 +37,11 @@ The library is already configured for:
 ./gradlew publishReleasePublicationToMavenRepository
 ```
 
-This uses the Maven repository configured through `gradle.properties`.
-
-## Current Remote Publication Limitation
-
-The project is publication-ready, but the currently configured JetBrains Space endpoint has recently responded with `503 Service Temporarily Unavailable` during publication attempts.
-
-That is an external availability problem, not a project metadata or artifact generation problem.
+This now uses only the repository values explicitly provided by ÂnimaLab through an untracked `publication.properties` file or CI secrets.
 
 ## Recommended Next Step For Broader Public Distribution
 
-To distribute beyond the currently configured repository, prepare one of these targets:
+To distribute publicly under ÂnimaLab ownership, prepare one of these targets:
 
 ### 1. Maven Central
 
@@ -69,7 +63,7 @@ Typical requirements:
 Recommended when:
 
 - source repository is hosted on GitHub
-- you want tight coupling between repository and package distribution
+- you want a short-term distribution path before Maven Central is live
 
 Typical requirements:
 
@@ -81,9 +75,9 @@ Typical requirements:
 The following items are still recommended before a broader public push:
 
 - define issue tracker URL
-- optionally add artifact signing for Maven Central readiness
-- optionally publish a sample app repository
-- optionally add CI workflow for build, test and publish automation
+- add artifact signing for Maven Central readiness
+- confirm the final ÂnimaLab namespace in the target registry
+- keep publication credentials outside source control
 
 ## Suggested Release Checklist
 
@@ -99,8 +93,11 @@ The following items are still recommended before a broader public push:
 
 ### Maven Publication Gate
 
-1. Confirm Maven repository credentials are available
-2. Confirm POM metadata, SCM metadata and maintainer metadata
-3. Publish with `./gradlew publishReleasePublicationToMavenRepository`
-4. Validate artifact coordinates from a clean sample consumer
-5. Announce the published version in release notes
+1. Confirm the ÂnimaLab namespace to publish from
+2. Confirm Maven repository credentials are available
+3. If using custom remote publication, provide `publicationRepositoryUrl`
+4. If using Maven Central, wire the chosen publish plugin and signing flow
+5. Confirm POM metadata, SCM metadata and maintainer metadata
+6. Publish with `./gradlew publishReleasePublicationToMavenRepository`
+7. Validate artifact coordinates from a clean sample consumer
+8. Announce the published version in release notes
