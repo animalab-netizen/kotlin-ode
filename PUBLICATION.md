@@ -16,7 +16,7 @@ The library is already configured for:
 
 - groupId: `br.com.lab`
 - artifactId: `kotlin-ode`
-- version: `0.0.1`
+- version: `0.1.0`
 
 ## Source Repository
 
@@ -87,9 +87,20 @@ The following items are still recommended before a broader public push:
 
 ## Suggested Release Checklist
 
+### GitHub Release Gate
+
 1. Run `./gradlew test`
-2. Update `CHANGELOG.md`
-3. Confirm version in `build.gradle`
-4. Publish locally and validate consumer integration
-5. Publish to remote repository
-6. Tag the release in source control
+2. Run `./gradlew publishReleasePublicationToMavenLocal`
+3. Confirm CI is green in `.github/workflows/ci.yml`
+4. Update `CHANGELOG.md`
+5. Confirm version in `build.gradle`
+6. Commit release metadata
+7. Create and push tag `v0.1.0`
+
+### Maven Publication Gate
+
+1. Confirm Maven repository credentials are available
+2. Confirm POM metadata, SCM metadata and maintainer metadata
+3. Publish with `./gradlew publishReleasePublicationToMavenRepository`
+4. Validate artifact coordinates from a clean sample consumer
+5. Announce the published version in release notes

@@ -2,6 +2,13 @@
 
 All notable changes to `kotlin-ode` should be documented in this file.
 
+## 0.1.0
+
+- prepared the standalone repository for public GitHub distribution
+- aligned publication metadata with the `animalab-netizen` organization
+- added CI workflow for build, test and local publication validation
+- documented the public release gate for GitHub and Maven distribution
+
 ## 0.0.1
 
 - extracted and stabilized the standalone `kotlin-ode` project

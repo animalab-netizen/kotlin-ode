@@ -28,13 +28,13 @@ Current coordinates:
 
 - `groupId`: `br.com.lab`
 - `artifactId`: `kotlin-ode`
-- `version`: `0.0.1`
+- `version`: `0.1.0`
 
 Dependency:
 
 ```gradle
 dependencies {
-    implementation "br.com.lab:kotlin-ode:0.0.1"
+    implementation "br.com.lab:kotlin-ode:0.1.0"
 }
 ```
 
@@ -67,7 +67,7 @@ repositories {
 }
 
 dependencies {
-    implementation "br.com.lab:kotlin-ode:0.0.1"
+    implementation "br.com.lab:kotlin-ode:0.1.0"
 }
 ```
 

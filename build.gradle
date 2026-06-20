@@ -25,7 +25,7 @@ apply plugin: 'maven-publish'
 def minSdkKotlinOde = 24
 def targetSdkKotlinOde = 30
 def versionCodeKotlinOde = 1
-def versionNameKotlinOde = "0.0.1"
+def versionNameKotlinOde = "0.1.0"
 def groupIdKotlinOde = "br.com.lab"
 def artifactIdKotlinOde = "kotlin-ode"
 def compileSdkKotlinOde = 30
