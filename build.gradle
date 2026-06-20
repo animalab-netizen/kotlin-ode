@@ -31,6 +31,7 @@ def artifactIdKotlinOde = "kotlin-ode"
 def compileSdkKotlinOde = 30
 def buildToolsVersionKotlinOde = "30.0.0"
 def projectDescriptionKotlinOde = "Opinionated Android delivery engine for Kotlin applications."
+def projectUrlKotlinOde = "https://github.com/animalab-netizen/kotlin-ode"
 def developerIdKotlinOde = "animalab"
 def developerNameKotlinOde = "ÂnimaLab"
 def developerEmailKotlinOde = "animalab.desenvolvimento@gmail.com"
@@ -93,6 +94,24 @@ task androidSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
+task androidJavadocsJar(type: Jar) {
+    archiveClassifier.set("javadoc")
+    def placeholderDir = file("$buildDir/generated/javadoc-placeholder")
+
+    doFirst {
+        placeholderDir.mkdirs()
+        file("$placeholderDir/README.md").text = """# kotlin-ode
+
+Placeholder Javadoc archive for Maven Central validation.
+
+Project documentation:
+https://github.com/animalab-netizen/kotlin-ode
+"""
+    }
+
+    from placeholderDir
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -128,6 +147,7 @@ publishing {
             version = versionNameKotlinOde
 
             artifact androidSourcesJar
+            artifact androidJavadocsJar
 
             pom {
                 name = artifactIdKotlinOde
@@ -146,6 +166,10 @@ publishing {
                         id = developerIdKotlinOde
                         name = developerNameKotlinOde
                         email = developerEmailKotlinOde
+                        organization = organizationNameKotlinOde
+                        if (organizationUrlKotlinOde) {
+                            organizationUrl = organizationUrlKotlinOde
+                        }
                     }
                 }
 
@@ -167,6 +191,25 @@ publishing {
                         if (scmDeveloperConnectionKotlinOde) {
                             developerConnection = scmDeveloperConnectionKotlinOde
                         }
+                    }
+                }
+
+                withXml {
+                    def root = asNode()
+
+                    if (!root.url) {
+                        root.appendNode('url', projectUrlKotlinOde)
+                    }
+
+                    def developersNode = root.developers ? root.developers[0] : root.appendNode('developers')
+                    def developerNode = developersNode.developer ? developersNode.developer[0] : developersNode.appendNode('developer')
+
+                    if (!developerNode.organization) {
+                        developerNode.appendNode('organization', organizationNameKotlinOde)
+                    }
+
+                    if (organizationUrlKotlinOde && !developerNode.organizationUrl) {
+                        developerNode.appendNode('organizationUrl', organizationUrlKotlinOde)
                     }
                 }
             }
